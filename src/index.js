@@ -15,5 +15,7 @@ const pixabayApiService = new PixabayApiService();
 
 function onSearch(event) {
   event.preventDefault();
+  pixabayApiService.query = event.currentTarget.elements.searchQuery.value;
+
   pixabayApiService.fetchPhotos();
 }
