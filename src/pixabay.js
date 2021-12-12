@@ -6,7 +6,12 @@ const searchParams = {
   orientation: 'horizontal',
   safesearch: true,
 };
+export default class PixabayApiService {
+  constructor() {}
 
-const url = `${BASE_URL}?key=${API_KEY}`;
+  fetchPhotos() {
+    const url = `${BASE_URL}?key=${API_KEY}`;
 
-fetch(url, searchParams).then(response => response.json());
+    fetch(url, searchParams).then(response => response.json());
+  }
+}
