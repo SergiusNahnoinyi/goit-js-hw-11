@@ -17,5 +17,11 @@ function onSearch(event) {
   event.preventDefault();
   pixabayApiService.query = event.currentTarget.elements.searchQuery.value;
 
+  if (pixabayApiService.query === '') {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again',
+    );
+  }
+
   pixabayApiService.fetchPhotos();
 }
