@@ -20,6 +20,7 @@ export default class PixabayApiService {
       .then(response => response.json())
       .then(data => {
         if (data.totalHits === 0) {
+          loadMoreButton.disable();
           Notiflix.Notify.failure(
             'Sorry, there are no images matching your search query. Please try again',
           );

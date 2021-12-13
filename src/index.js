@@ -10,6 +10,7 @@ import LoadMoreButton from './load-more-button';
 const refs = {
   searchForm: document.querySelector('.search-form'),
   cardsContainer: document.querySelector('.gallery'),
+  searchButton: document.querySelector('[type="submit"]'),
 };
 
 const loadMoreButton = new LoadMoreButton({
@@ -30,6 +31,7 @@ function onSearch(event) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again',
     );
+    return;
   }
   loadMoreButton.show();
   pixabayApiService.resetPage();
