@@ -9,9 +9,11 @@ import cardsTemplate from './templates/photo-card.hbs';
 const refs = {
   searchForm: document.querySelector('.search-form'),
   cardsContainer: document.querySelector('.gallery'),
+  loadMoreButton: document.querySelector('.load-more'),
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
+refs.loadMoreButton.addEventListener('click', onLoadMore);
 
 const pixabayApiService = new PixabayApiService();
 
@@ -24,6 +26,7 @@ function onSearch(event) {
       'Sorry, there are no images matching your search query. Please try again',
     );
   }
+  pixabayApiService.resetPage();
   clearCardsContainer();
   pixabayApiService
     .fetchPhotos()
@@ -37,4 +40,8 @@ function renderPhotoCardsMarkup(hits) {
 
 function clearCardsContainer() {
   refs.cardsContainer.innerHTML = '';
+}
+
+function onLoadMore() {
+  pixabayApiService.fetchPhotos().then(hits => renderPhotoCardsMarkup(hits));
 }

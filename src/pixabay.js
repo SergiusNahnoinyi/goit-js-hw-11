@@ -5,15 +5,16 @@ const BASE_URL = 'https://pixabay.com/api/';
 const searchParams = {
   image_type: 'photo',
   orientation: 'horizontal',
-  safesearch: true,
+  safesearch: 'true',
 };
 export default class PixabayApiService {
   constructor() {
     this.searchQuery = '';
+    this.page = 1;
   }
 
   fetchPhotos() {
-    const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}`;
+    const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=40`;
 
     return fetch(url, searchParams)
       .then(response => response.json())
@@ -23,8 +24,17 @@ export default class PixabayApiService {
             'Sorry, there are no images matching your search query. Please try again',
           );
         }
+        this.incrementPage();
         return data.hits;
       });
+  }
+
+  incrementPage() {
+    this.page += 1;
+  }
+
+  resetPage() {
+    this.page = 1;
   }
 
   get query() {
