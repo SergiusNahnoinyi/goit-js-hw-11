@@ -4,9 +4,11 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import PixabayApiService from './pixabay';
+import cardsTemplate from './templates/photo-card.hbs';
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
+  cardsContainer: document.querySelector('.gallery'),
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -23,5 +25,9 @@ function onSearch(event) {
     );
   }
 
-  pixabayApiService.fetchPhotos();
+  pixabayApiService.fetchPhotos().then(hits => renderPhotoCardsMarkup(hits));
+}
+
+function renderPhotoCardsMarkup(hits) {
+  refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(hits));
 }

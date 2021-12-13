@@ -15,7 +15,7 @@ export default class PixabayApiService {
   fetchPhotos() {
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}`;
 
-    fetch(url, searchParams)
+    return fetch(url, searchParams)
       .then(response => response.json())
       .then(data => {
         if (data.totalHits === 0) {
@@ -23,6 +23,7 @@ export default class PixabayApiService {
             'Sorry, there are no images matching your search query. Please try again',
           );
         }
+        return data.hits;
       });
   }
 
