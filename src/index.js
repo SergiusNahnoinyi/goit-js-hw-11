@@ -24,10 +24,17 @@ function onSearch(event) {
       'Sorry, there are no images matching your search query. Please try again',
     );
   }
-
-  pixabayApiService.fetchPhotos().then(hits => renderPhotoCardsMarkup(hits));
+  clearCardsContainer();
+  pixabayApiService
+    .fetchPhotos()
+    .then(hits => renderPhotoCardsMarkup(hits))
+    .finally(() => refs.searchForm.reset());
 }
 
 function renderPhotoCardsMarkup(hits) {
   refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(hits));
+}
+
+function clearCardsContainer() {
+  refs.cardsContainer.innerHTML = '';
 }
