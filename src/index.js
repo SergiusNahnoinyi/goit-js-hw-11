@@ -5,15 +5,20 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import PixabayApiService from './pixabay';
 import cardsTemplate from './templates/photo-card.hbs';
+import LoadMoreButton from './load-more-button';
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
   cardsContainer: document.querySelector('.gallery'),
-  loadMoreButton: document.querySelector('.load-more'),
 };
 
+const loadMoreButton = new LoadMoreButton({
+  selector: '[data-action="load-more"]',
+  hidden: true,
+});
+
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreButton.addEventListener('click', onLoadMore);
+loadMoreButton.refs.button.addEventListener('click', fetchPhotos);
 
 const pixabayApiService = new PixabayApiService();
 
@@ -26,11 +31,20 @@ function onSearch(event) {
       'Sorry, there are no images matching your search query. Please try again',
     );
   }
+  loadMoreButton.show();
   pixabayApiService.resetPage();
   clearCardsContainer();
+  fetchPhotos();
+}
+
+function fetchPhotos() {
+  loadMoreButton.disable();
   pixabayApiService
     .fetchPhotos()
-    .then(hits => renderPhotoCardsMarkup(hits))
+    .then(hits => {
+      renderPhotoCardsMarkup(hits);
+      loadMoreButton.enable();
+    })
     .finally(() => refs.searchForm.reset());
 }
 
@@ -40,8 +54,4 @@ function renderPhotoCardsMarkup(hits) {
 
 function clearCardsContainer() {
   refs.cardsContainer.innerHTML = '';
-}
-
-function onLoadMore() {
-  pixabayApiService.fetchPhotos().then(hits => renderPhotoCardsMarkup(hits));
 }
