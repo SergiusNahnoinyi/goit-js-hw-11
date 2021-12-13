@@ -11,3 +11,36 @@ body {
   color: #212121;
   line-height: 1.5;
 }
+
+img {
+  display: block;
+  max-width: 280px;
+  height: 280px;
+}
+
+.search-form {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo-card {
+  margin: 10px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.load-more{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
