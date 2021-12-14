@@ -14,14 +14,27 @@ body {
 
 img {
   display: block;
-  width: 280px;
-  height: 280px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
 
 .search-form {
+  padding: 15px;
   text-align: center;
-  margin-bottom: 10px;
+  background-color: #2196f3;
 }
+
+input {
+  height: 25px;
+  padding: 10px;
+  letter-spacing: 0.01em;
+  color: rgba(28, 28, 28, 0.5);
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  outline: none;
+}
+
 
 .gallery {
   display: flex;
@@ -31,18 +44,41 @@ img {
 
 .photo-card {
   margin: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 }
 
 .info {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  padding: 10px;
 }
 
-.button{
+.info-item {
+margin: 0;
+}
+
+.button {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: transparent;
+  border-radius: 4px;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+}
+
+button {
+  padding: 5px 10px;
+  border: transparent;
+  border-radius: 4px;
+  background-color: white;
+  color: rgba(28, 28, 28, 0.5);
+  cursor: pointer;
 }
 
 .button.is-hidden {
