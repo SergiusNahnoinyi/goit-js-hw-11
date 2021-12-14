@@ -66,6 +66,7 @@ function onLoadMore() {
 
 function renderPhotoCardsMarkup(data) {
   refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(data.hits));
+  smoothScroll();
   const gallery = new SimpleLightbox('.gallery a', {
     captionType: 'attr',
     captionsData: 'alt',
@@ -76,4 +77,15 @@ function renderPhotoCardsMarkup(data) {
 
 function clearCardsContainer() {
   refs.cardsContainer.innerHTML = '';
+}
+
+function smoothScroll() {
+  setTimeout(() => {
+    const { height: cardHeight } = refs.cardsContainer.firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 12,
+      behavior: 'smooth',
+    });
+  }, 1000);
 }
