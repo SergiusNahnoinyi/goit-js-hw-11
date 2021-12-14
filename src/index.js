@@ -50,6 +50,10 @@ function fetchPhotos() {
           'Sorry, there are no images matching your search query. Please try again',
         );
         return;
+      } else if (data.hits.length === 0) {
+        loadMoreButton.hide();
+        Notiflix.Notify.failure("We're sorry, but you've reached the end of search results");
+        return;
       }
       renderPhotoCardsMarkup(data);
       loadMoreButton.enable();
