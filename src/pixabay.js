@@ -1,6 +1,4 @@
-import Notiflix from 'notiflix';
 const axios = require('axios');
-
 const API_KEY = '24778312-18f63a423fbed9787418fdc16';
 const BASE_URL = 'https://pixabay.com/api/';
 const searchParams = {

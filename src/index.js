@@ -1,5 +1,4 @@
 import './css/styles.css';
-const axios = require('axios');
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -18,10 +17,10 @@ const loadMoreButton = new LoadMoreButton({
   hidden: true,
 });
 
+const pixabayApiService = new PixabayApiService();
+
 refs.searchForm.addEventListener('submit', onSearch);
 loadMoreButton.refs.button.addEventListener('click', onLoadMore);
-
-const pixabayApiService = new PixabayApiService();
 
 function onSearch(event) {
   event.preventDefault();
