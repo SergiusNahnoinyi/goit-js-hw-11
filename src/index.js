@@ -67,6 +67,12 @@ function onLoadMore() {
 
 function renderPhotoCardsMarkup(data) {
   refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(data.hits));
+  const gallery = new SimpleLightbox('.gallery a', {
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
+  gallery.refresh();
 }
 
 function clearCardsContainer() {
