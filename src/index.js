@@ -27,12 +27,6 @@ function onSearch(event) {
   event.preventDefault();
   pixabayApiService.query = event.currentTarget.elements.searchQuery.value;
 
-  if (pixabayApiService.query === '') {
-    Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again',
-    );
-    return;
-  }
   loadMoreButton.show();
   pixabayApiService.resetPage();
   clearCardsContainer();
@@ -44,7 +38,7 @@ function fetchPhotos() {
   pixabayApiService
     .fetchPhotos()
     .then(data => {
-      if (data.totalHits === 0) {
+      if (data.totalHits === 0 || pixabayApiService.query === '') {
         loadMoreButton.hide();
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again',
