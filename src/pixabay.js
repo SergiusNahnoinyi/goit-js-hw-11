@@ -18,9 +18,10 @@ export default class PixabayApiService {
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=40`;
 
     const response = await axios.get(url, searchParams);
+    const data = response.data;
 
     this.incrementPage();
-    return response.data;
+    return data;
   }
 
   incrementPage() {
