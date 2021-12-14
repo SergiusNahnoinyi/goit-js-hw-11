@@ -51,6 +51,7 @@ function fetchPhotos() {
       }
       renderPhotoCardsMarkup(data);
       loadMoreButton.enable();
+      Notiflix.Notify.success(`Hooray! We found ${data.total} images`);
     })
     .finally(() => refs.searchForm.reset());
 }
