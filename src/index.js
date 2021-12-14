@@ -36,7 +36,7 @@ function onSearch(event) {
 function fetchPhotos() {
   loadMoreButton.disable();
   pixabayApiService
-    .fetchPhotos()
+    .getPhotos()
     .then(data => {
       if (data.totalHits === 0 || pixabayApiService.query === '') {
         loadMoreButton.hide();
