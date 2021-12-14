@@ -19,14 +19,8 @@ export default class PixabayApiService {
     return fetch(url, searchParams)
       .then(response => response.json())
       .then(data => {
-        if (data.totalHits === 0) {
-          loadMoreButton.disable();
-          Notiflix.Notify.failure(
-            'Sorry, there are no images matching your search query. Please try again',
-          );
-        }
         this.incrementPage();
-        return data.hits;
+        return data;
       });
   }
 

@@ -43,15 +43,22 @@ function fetchPhotos() {
   loadMoreButton.disable();
   pixabayApiService
     .fetchPhotos()
-    .then(hits => {
-      renderPhotoCardsMarkup(hits);
+    .then(data => {
+      if (data.totalHits === 0) {
+        loadMoreButton.hide();
+        Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again',
+        );
+        return;
+      }
+      renderPhotoCardsMarkup(data);
       loadMoreButton.enable();
     })
     .finally(() => refs.searchForm.reset());
 }
 
-function renderPhotoCardsMarkup(hits) {
-  refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(hits));
+function renderPhotoCardsMarkup(data) {
+  refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(data.hits));
 }
 
 function clearCardsContainer() {
