@@ -60,13 +60,13 @@ function onLoadMore() {
       return;
     }
     renderPhotoCardsMarkup(data);
+    smoothScroll();
     loadMoreButton.enable();
   });
 }
 
 function renderPhotoCardsMarkup(data) {
   refs.cardsContainer.insertAdjacentHTML('beforeend', cardsTemplate(data.hits));
-  smoothScroll();
   const gallery = new SimpleLightbox('.gallery a', {
     captionType: 'attr',
     captionsData: 'alt',
@@ -84,7 +84,7 @@ function smoothScroll() {
     const { height: cardHeight } = refs.cardsContainer.firstElementChild.getBoundingClientRect();
 
     window.scrollBy({
-      top: cardHeight * 12,
+      top: cardHeight * 4,
       behavior: 'smooth',
     });
   }, 1000);
